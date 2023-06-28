@@ -28,8 +28,6 @@ class AlgoEvent:
         self.modelDict = {}
         
     def start(self, mEvt):
-        mEvt["StartDate"] = "2010-01-01"
-        mEvt["EndDate"] = "2014-01-01"
         mEvt['subscribeList'] = instruments
         mEvt['BaseCurrency'] = "HKD"
         volumeCoefficient = mEvt['InitialCapital'] / 500_000
@@ -56,7 +54,6 @@ class AlgoEvent:
 
     def on_marketdatafeed(self, md, ab):
         lastprice = md.lastPrice
-        # retrieve recent observations
         res = self.evt.getHistoricalBar({"instrument": md.instrument}, 50, 'D')
         closingPrices = np.array([res[t]['c'] for t in res])
 
